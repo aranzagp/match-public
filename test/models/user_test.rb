@@ -40,7 +40,7 @@ class UserTest < ActiveSupport::TestCase
     user = User.new(email: 'miguel.urbina@gmail.com',
                     password: 'normalUser',
                     password_confirmation: 'normalUser')
-    refute user.valid?
+    assert user.valid?
   end
 
   test 'user must be valid' do

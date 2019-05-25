@@ -48,7 +48,7 @@ class LoginTest < ApplicationSystemTestCase
     fill_in 'user[password_confirmation]', with: '123456'
 
     click_button 'Registrarse'
-    assert page.has_content?('E-mail no válido')
+    assert page.has_content?('Debes crear primero tu equipo')
   end
 
   test 'user can logout' do
