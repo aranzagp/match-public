@@ -16,10 +16,10 @@
     - name: Add SSH key to server for deploy user
       authorized_key:
         user: deploy
-        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCnEBkNSceB/QRnMUWsEWiqZ5HE9B0gYyUpZrGdNK/cUy//wNXQR2keANQupZxPjAOUbLBNH7LzRYYErBRLTSJQtB6zuQiwLWko0mDMs1UGV7+K6piMPWyn9imaVYAyz0p4Wg3RugqlNnNNH/1VDCV81aVy3LQzUAqZWVwGJxHs6qigJfFOXfIpccI3UGGbaxQH1FgNk0UjfpnHvx9yPkAP6PWXtGRtZjS0QUvtmyf/I88Uj6hHTXA5Th2qXt8aKADKjbSfIHAZ0ZBAvdZm3cxcwbXihnk6TKeBhb3f2agyCPnryyg0NDS/F9MGZhV0qhnSZv99pvevNE6RjW4e7ke9 hector.bustillos@crowdint.com"
+        key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCvWSGPqTLpLMisxEStYO2WSrx4ePSv+VwMbTuFXUinUhg3XO0qOiFfklbRP7P6AbsGlcYR2p1KJhbskIlAdLx3ZNzeQ0t+t2X6BIv+GwQ1Z54qFLFFL+lnNdfnSX4CUimVHzPODGd5+M8G67bia3ZpPwOthHPirz5aZZD21tMUFxHZQi2nfBB6GNdvtGW/RZgmgrywMRIxyPew9gzKI9uNhSPyKCer2VoB5imKnYrSscEc4rvN38ey4HLAtZHatp9ztpryjLV0IRuJxkswasATGCOmsm2o//J00B8y0ofnHnH6jY+5MQA1iKXxt0anAOfTsyJmmqlKvq+p8uhS/WGrYTKm1q3dCdpNaUsMzKuppg8/DL76AdAbxxM/oQ9c7IsLCfTlYHEmNTaniioXCnJ5yoiCc+e8lzud/WKa4elY/6aaU3uYkuCxLyAqS7FhInECKhToF7TGmCdO9T3jaMmHSqwdmXeEcUr5glIWhxeXkLfe0TED2Pl6wvucMTNdQezVa+V61PKt44CllnCPu59hQMXHJWM4k8MYcJt3UnnorhjKJHqgk/OQ6w9ijbLWShvB/ZIUoNEHgVMaisbEsKbU1fct6XO5Qxrm3CIDSWO+gLDAliBN4b2cM21xGNbzFQurZDsy9Tu2YQwoSqly/g8bxjZaLwyFUpcxrn5A0je5bw== aranza@michelada.io"
     - name: Install Ruby dependencies
       apt:
-        name: ['autoconf', 'bison', 'build-essential', 'libssl-dev', 'libyaml-dev', 'libreadline6-dev', 'zlib1g-dev', 'libncurses5-dev', 'libffi-dev', 'libgdbm5', 'libgdbm-dev', 'curl', 'git-core', 'nginx', 'nodejs', 'yarn', 'gcc']
+        name: ['autoconf', 'bison', 'build-essential', 'libssl-dev', 'libyaml-dev', 'libreadline6-dev', 'zlib1g-dev', 'libncurses5-dev', 'libffi-dev', 'libgdbm5', 'libgdbm-dev', 'libpq-dev', 'curl', 'git-core', 'nginx', 'nodejs', 'yarn', 'gcc']
         update_cache: yes
 
 

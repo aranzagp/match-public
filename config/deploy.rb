@@ -43,6 +43,8 @@ set :branch,        :develop
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
+set :linked_files, fetch(:linked_files, []).push("config/database.yml")
+
 append :linked_dirs, '.bundle'
 
 namespace :puma do
@@ -79,6 +81,16 @@ namespace :deploy do
     end
   end
 
+  desc "setup: nginx restart"
+  task :restart_nginx do
+    on roles(:app) do
+      puts ">>>>>>>>>>>>> nginx restart"
+      sudo :mkdir, "-pv", "#{shared_path}/log"
+      sudo :rm, "-f", "#{fetch(:nginx_sites_enabled_path)}/default"
+      sudo :service, "nginx restart"
+    end
+  end
+
   desc "setup: copy config/master.key to shared/config"
   task :copy_linked_master_key do
     on roles(:app) do
@@ -86,6 +98,15 @@ namespace :deploy do
       sudo :mkdir, "-pv", shared_path
       upload! "config/master.key", "#{shared_path}/config/master.key"
       sudo :chmod, "600", "#{shared_path}/config/master.key"
+    end
+  end
+
+  desc "setup: config/database.yml"
+  task :copy_database_yml do
+    on roles(:app) do
+      puts ">>>>>>>>> database.yml"
+      sudo :mkdir, "-pv", shared_path
+      upload! "config/database.yml", "#{shared_path}/config/database.yml"
     end
   end
 
@@ -110,7 +131,8 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # invoke 'puma:restart'
+      puts ">>>>>> Deploy"
+      invoke 'puma:restart_nginx'
     end
   end
 
@@ -120,6 +142,7 @@ namespace :deploy do
   after  :finishing,    :restart
   before "bundler:install", "deploy:bundle_install"
   before "deploy:check:linked_files", "deploy:copy_linked_master_key"
+  before "deploy:check:linked_files", "deploy:copy_database_yml"
 end
 
 # ps aux | grep puma    # Get puma pid
